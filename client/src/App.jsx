@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
+import TaskDetails from "./pages/TaskDetails";
 import Layout from "./components/Layout";
 
 function App() {
@@ -25,17 +26,16 @@ function App() {
           {/* Project / Workspace */}
           <Route path="/projects" element={<Projects />} />
 
-          {/* Pages to be implemented by other members */}
+          {/* Task board */}
           <Route
             path="/tasks"
             element={<PagePlaceholder title="Tasks" />}
           />
 
-          <Route
-            path="/task/:id"
-            element={<PagePlaceholder title="Task Details" />}
-          />
+          {/* Task details */}
+          <Route path="/task/:id" element={<TaskDetails />} />
 
+          {/* Pages to be implemented by other members */}
           <Route
             path="/members"
             element={<PagePlaceholder title="Team Members" />}

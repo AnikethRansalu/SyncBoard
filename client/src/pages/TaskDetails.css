@@ -1,0 +1,252 @@
+.task-details-page {
+  min-height: calc(100vh - 72px);
+  padding: 35px 40px;
+  box-sizing: border-box;
+  background: #f4f6fb;
+  color: #172033;
+}
+
+.task-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.task-details-header h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.task-details-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.edit-task-button {
+  padding: 10px 17px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-task-button:hover {
+  background: #f8fafc;
+}
+
+.task-details-card {
+  max-width: 900px;
+  background: #ffffff;
+  border: 1px solid #e1e6ef;
+  border-radius: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.task-details-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.details-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.task-details-title-row h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 25px;
+}
+
+.details-priority {
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.details-priority.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.details-priority.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.details-priority.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.details-divider {
+  height: 1px;
+  margin: 25px 0;
+  background: #e5e7eb;
+}
+
+.task-description-section h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.task-description-section p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.task-information {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.information-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.information-label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.information-item strong {
+  color: #334155;
+  font-size: 14px;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.secondary-task-button,
+.primary-task-button {
+  padding: 10px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-task-button {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.secondary-task-button:hover {
+  background: #f8fafc;
+}
+
+.primary-task-button {
+  background: #2563eb;
+  border: 1px solid #2563eb;
+  color: #ffffff;
+}
+
+.primary-task-button:hover {
+  background: #1d4ed8;
+}
+
+.task-not-found {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e1e6ef;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.task-not-found h2 {
+  margin: 0 0 10px;
+}
+
+.task-not-found p {
+  margin: 0 0 25px;
+  color: #64748b;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 7px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .task-details-page {
+    padding: 25px 20px;
+  }
+
+  .task-details-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .task-details-card {
+    padding: 22px;
+  }
+
+  .task-details-title-row {
+    flex-direction: column;
+  }
+
+  .task-information {
+    grid-template-columns: 1fr;
+  }
+
+  .task-actions {
+    flex-direction: column;
+  }
+
+  .secondary-task-button,
+  .primary-task-button {
+    width: 100%;
+  }
+}
