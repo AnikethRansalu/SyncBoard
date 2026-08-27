@@ -14,7 +14,9 @@ function Column({ title, tasks }) {
         ))}
       </div>
 
-      <button className="column-add">+ Add task</button>
+      <button type="button" className="column-add">
+        + Add task
+      </button>
     </section>
   );
 }
