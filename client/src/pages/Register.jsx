@@ -1,9 +1,57 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setMessage("");
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || "Registration failed");
+        return;
+      }
+
+      setMessage("Account created successfully!");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      setMessage("Unable to connect to the server");
+    }
   };
 
   return (
@@ -21,6 +69,8 @@ function Register() {
           Join your team workspace and start collaborating.
         </p>
 
+        {message && <p className="form-message">{message}</p>}
+
         <form onSubmit={handleSubmit}>
           <label htmlFor="register-name">Full name</label>
 
@@ -29,6 +79,8 @@ function Register() {
             type="text"
             placeholder="Enter your full name"
             required
+            value={name}
+            onChange={(event) => setName(event.target.value)}
           />
 
           <label htmlFor="register-email">Email address</label>
@@ -38,6 +90,8 @@ function Register() {
             type="email"
             placeholder="you@example.com"
             required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
 
           <label htmlFor="register-password">Password</label>
@@ -48,6 +102,8 @@ function Register() {
             placeholder="Create a password"
             required
             minLength="6"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
           />
 
           <label htmlFor="register-confirm-password">
@@ -60,6 +116,8 @@ function Register() {
             placeholder="Confirm your password"
             required
             minLength="6"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
           />
 
           <button type="submit">Create account</button>
