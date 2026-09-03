@@ -1,13 +1,25 @@
 import Column from "./Column";
 
-function Board({ tasks }) {
+function Board({ tasks, onStatusChange }) {
   return (
     <div className="board">
-      <Column title="To Do" tasks={tasks.todo} />
+      <Column
+        title="To Do"
+        tasks={tasks.todo}
+        onStatusChange={onStatusChange}
+      />
 
-      <Column title="Doing" tasks={tasks.doing} />
+      <Column
+        title="Doing"
+        tasks={tasks.doing}
+        onStatusChange={onStatusChange}
+      />
 
-      <Column title="Done" tasks={tasks.done} />
+      <Column
+        title="Done"
+        tasks={tasks.done}
+        onStatusChange={onStatusChange}
+      />
     </div>
   );
 }
