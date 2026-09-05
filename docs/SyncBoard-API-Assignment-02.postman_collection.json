@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "SyncBoard API - Assignment 02",
+    "description": "Postman collection for SyncBoard Assignment 02 - Working REST APIs with mock data integrated with the frontend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman User\",\n  \"email\": \"postmanuser2@example.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"postmanuser2@example.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/projects"
+          }
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/projects/1"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/projects",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman Test Project\",\n  \"description\": \"Project created through Postman API testing\",\n  \"status\": \"Active\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/projects/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Postman Project\",\n  \"description\": \"Project updated through Postman API testing\",\n  \"status\": \"Active\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/projects/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/tasks"
+          }
+        },
+        {
+          "name": "Get Task by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/tasks/1"
+          }
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/tasks",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman Test Task\",\n  \"description\": \"Task created through Postman API testing\",\n  \"status\": \"To Do\",\n  \"priority\": \"Medium\",\n  \"assignee\": \"Aniketh\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/tasks/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Postman Task\",\n  \"description\": \"Task updated through Postman API testing\",\n  \"status\": \"Doing\",\n  \"priority\": \"High\",\n  \"assignee\": \"Aniketh\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:5000/api/tasks/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Members",
+      "item": [
+        {
+          "name": "Get All Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/members"
+          }
+        },
+        {
+          "name": "Get Member by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/members/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Get All Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/profiles"
+          }
+        },
+        {
+          "name": "Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/profiles/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Get All Settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/settings"
+          }
+        },
+        {
+          "name": "Get User Settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:5000/api/settings/1"
+          }
+        },
+        {
+          "name": "Update User Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:5000/api/settings/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailNotifications\": true,\n  \"taskReminders\": true,\n  \"projectUpdates\": true,\n  \"theme\": \"Light\",\n  \"language\": \"English\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
