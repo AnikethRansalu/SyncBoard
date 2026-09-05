@@ -1,6 +1,95 @@
+import { useEffect, useState } from "react";
 import "./Settings.css";
 
 function Settings() {
+  const [settings, setSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/settings/1"
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch settings");
+      }
+
+      const data = await response.json();
+
+      setSettings(data);
+      setError("");
+    } catch (error) {
+      console.error("Error fetching settings:", error);
+      setError("Unable to load settings. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (field, value) => {
+    setSettings({
+      ...settings,
+      [field]: value,
+    });
+
+    setMessage("");
+  };
+
+  const saveSettings = async (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/settings/1",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(settings),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to save settings");
+      }
+
+      const data = await response.json();
+
+      setSettings(data.settings);
+      setMessage("Settings saved successfully.");
+      setError("");
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      setError("Unable to save settings. Please try again.");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="settings-page">
+        <p>Loading settings...</p>
+      </div>
+    );
+  }
+
+  if (error && !settings) {
+    return (
+      <div className="settings-page">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="settings-page">
       <div className="settings-header">
@@ -9,10 +98,17 @@ function Settings() {
           <p>Manage your SyncBoard preferences.</p>
         </div>
 
-        <button type="button" className="save-settings-button">
+        <button
+          type="button"
+          className="save-settings-button"
+          onClick={saveSettings}
+        >
           Save Settings
         </button>
       </div>
+
+      {message && <p>{message}</p>}
+      {error && <p>{error}</p>}
 
       <div className="settings-layout">
         <section className="settings-card">
@@ -30,7 +126,16 @@ function Settings() {
             </div>
 
             <label className="toggle">
-              <input type="checkbox" defaultChecked />
+              <input
+                type="checkbox"
+                checked={settings.taskReminders}
+                onChange={(event) =>
+                  handleChange(
+                    "taskReminders",
+                    event.target.checked
+                  )
+                }
+              />
               <span className="toggle-slider"></span>
             </label>
           </div>
@@ -42,7 +147,16 @@ function Settings() {
             </div>
 
             <label className="toggle">
-              <input type="checkbox" defaultChecked />
+              <input
+                type="checkbox"
+                checked={settings.projectUpdates}
+                onChange={(event) =>
+                  handleChange(
+                    "projectUpdates",
+                    event.target.checked
+                  )
+                }
+              />
               <span className="toggle-slider"></span>
             </label>
           </div>
@@ -54,7 +168,16 @@ function Settings() {
             </div>
 
             <label className="toggle">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={settings.emailNotifications}
+                onChange={(event) =>
+                  handleChange(
+                    "emailNotifications",
+                    event.target.checked
+                  )
+                }
+              />
               <span className="toggle-slider"></span>
             </label>
           </div>
@@ -69,7 +192,10 @@ function Settings() {
           </div>
 
           <div className="settings-field">
-            <label htmlFor="workspace-name">Workspace name</label>
+            <label htmlFor="workspace-name">
+              Workspace name
+            </label>
+
             <input
               id="workspace-name"
               type="text"
@@ -101,23 +227,42 @@ function Settings() {
           <div className="settings-field">
             <label htmlFor="theme">Theme</label>
 
-            <select id="theme" defaultValue="light">
-              <option value="light">Light</option>
-              <option value="system">System Default</option>
+            <select
+              id="theme"
+              value={settings.theme}
+              onChange={(event) =>
+                handleChange("theme", event.target.value)
+              }
+            >
+              <option value="Light">Light</option>
+              <option value="Dark">Dark</option>
             </select>
           </div>
 
           <div className="settings-field">
             <label htmlFor="language">Language</label>
 
-            <select id="language" defaultValue="english">
-              <option value="english">English</option>
+            <select
+              id="language"
+              value={settings.language}
+              onChange={(event) =>
+                handleChange(
+                  "language",
+                  event.target.value
+                )
+              }
+            >
+              <option value="English">English</option>
             </select>
           </div>
         </section>
       </div>
 
-      <button type="button" className="mobile-save-settings-button">
+      <button
+        type="button"
+        className="mobile-save-settings-button"
+        onClick={saveSettings}
+      >
         Save Settings
       </button>
     </div>
