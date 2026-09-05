@@ -1,0 +1,251 @@
+openapi: 3.0.0
+info:
+  title: SyncBoard API - Assignment 02
+  version: 1.0.0
+  description: ''
+servers:
+  - url: 'http://localhost:5000'
+  - url: Delete Task
+paths:
+  /api/settings:
+    get:
+      summary: Get All Settings
+      responses: {}
+      tags:
+        - Settings
+  /api/settings/1:
+    get:
+      summary: Get User Settings
+      responses: {}
+      tags:
+        - Settings
+    put:
+      summary: Update User Settings
+      responses: {}
+      tags:
+        - Settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailNotifications:
+                  type: boolean
+                taskReminders:
+                  type: boolean
+                projectUpdates:
+                  type: boolean
+                theme:
+                  type: string
+                language:
+                  type: string
+            example:
+              emailNotifications: false
+              taskReminders: false
+              projectUpdates: true
+              theme: Dark
+              language: English
+  /api/members:
+    get:
+      summary: Get All Members
+      responses: {}
+      tags:
+        - Members
+  /api/members/1:
+    get:
+      summary: Get Member by ID
+      responses: {}
+      tags:
+        - Members
+  /api/profiles:
+    get:
+      summary: Get All Profiles
+      responses: {}
+      tags:
+        - Profiles
+  /api/profiles/1:
+    get:
+      summary: Get Profile by ID
+      responses: {}
+      tags:
+        - Profiles
+  /api/auth/register:
+    post:
+      summary: Register User
+      responses: {}
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: color
+            example:
+              name: Postman Test User
+              email: postmanuser2@example.com
+              password: '123456'
+  /api/auth/login:
+    post:
+      summary: Login User
+      responses: {}
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: color
+            example:
+              name: Postman Test User
+              email: postmanuser@example.com
+              password: '123456'
+  /api/projects/1:
+    put:
+      summary: Update Project
+      responses: {}
+      tags:
+        - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+            example:
+              name: Updated Postman Project
+              description: Project updated through Postman API testing
+              status: Completed
+    get:
+      summary: Get Project by ID
+      responses: {}
+      tags:
+        - Projects
+    delete:
+      summary: Delete Project
+      responses: {}
+      tags:
+        - Projects
+  /api/projects:
+    post:
+      summary: Create Project
+      responses: {}
+      tags:
+        - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+            example:
+              name: Postman Test Project
+              description: Project created through Postman API testing
+              status: Active
+    get:
+      summary: Get All Projects
+      responses: {}
+      tags:
+        - Projects
+  /api/tasks/1:
+    get:
+      summary: Get Task by ID
+      responses: {}
+      tags:
+        - Tasks
+    put:
+      summary: Update Task
+      responses: {}
+      tags:
+        - Tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                priority:
+                  type: string
+                assignee:
+                  type: string
+            example:
+              title: Updated Postman Task
+              description: Task updated through Postman API testing
+              status: Doing
+              priority: High
+              assignee: Aniketh
+  /api/tasks:
+    post:
+      summary: Create Task
+      responses: {}
+      tags:
+        - Tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                priority:
+                  type: string
+                assignee:
+                  type: string
+            example:
+              title: Postman Test Task
+              description: Task created through Postman API testing
+              status: To Do
+              priority: Medium
+              assignee: Aniketh
+    get:
+      summary: Get All Tasks
+      responses: {}
+      tags:
+        - Tasks
+  /:
+    delete:
+      summary: Delete Task
+      responses: {}
+      tags:
+        - Tasks
