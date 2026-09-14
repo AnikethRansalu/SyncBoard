@@ -1,0 +1,135 @@
+openapi: 3.0.3
+
+info:
+  title: SyncBoard API - Assignment 03
+  description: REST API for SyncBoard with MongoDB Atlas persistence
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+
+tags:
+  - name: Projects
+    description: Project management API
+
+paths:
+
+  /api/projects:
+
+    get:
+      tags:
+        - Projects
+      summary: Get all projects
+      responses:
+        "200":
+          description: Projects retrieved successfully
+
+    post:
+      tags:
+        - Projects
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "201":
+          description: Project created successfully
+        "400":
+          description: Project name and description are required
+
+  /api/projects/{id}:
+
+    get:
+      tags:
+        - Projects
+      summary: Get a project by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project retrieved successfully
+        "404":
+          description: Project not found
+
+    put:
+      tags:
+        - Projects
+      summary: Update a project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "200":
+          description: Project updated successfully
+        "404":
+          description: Project not found
+
+    delete:
+      tags:
+        - Projects
+      summary: Delete a project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project deleted successfully
+        "404":
+          description: Project not found
+
+components:
+
+  schemas:
+
+    ProjectInput:
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          example: Atlas Test Project
+
+        description:
+          type: string
+          example: Testing MongoDB Atlas persistence
+
+        status:
+          type: string
+          example: Planning
+
+        progress:
+          type: number
+          minimum: 0
+          maximum: 100
+          example: 10
+
+        members:
+          type: number
+          minimum: 0
+          example: 2
+
+        dueDate:
+          type: string
+          nullable: true
+          example: "2026-11-01"
