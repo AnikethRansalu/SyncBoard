@@ -1,519 +1,543 @@
 # SyncBoard
 
-SyncBoard is a collaborative task and project management web application designed to help teams organize projects, manage tasks, track progress, and collaborate efficiently.
+SyncBoard is a collaborative project management web application developed as a full-stack group project. It provides project, task, team-member, profile, settings, and authentication functionality through a React/Vite frontend and a Node.js/Express backend connected to MongoDB Atlas.
 
-This project was developed as a team project for **Assignment 02 – Working REST APIs with Mock Data Integrated with Frontend**.
+## Assignment 03 – Working Full-Stack Application
 
-The current version extends the static React frontend from Assignment 01 by integrating a Node.js and Express REST API using mock/in-memory data. The project includes REST API endpoints for authentication, projects, tasks, team members, profiles, and settings.
+This version extends the earlier static frontend and REST API work into a database-backed full-stack application.
 
----
+### Team Members and Responsibilities
 
-## 🚀 Features
+The following member order and responsibilities are based on the team allocation provided for the project:
 
-- User Login
-- User Registration
-- Dashboard interface
-- Projects / Workspace management
-- Kanban-style task board
-- To Do, Doing, and Done task columns
-- Task creation, updating and deletion
-- Task Details page
-- Team Members page
-- User Profile page
-- Settings page
-- REST API integration
-- Mock/in-memory backend data
-- CRUD operations for projects and tasks
-- Settings update API
-- Postman API testing
-- OpenAPI 3.0 API specification
-- Responsive navigation layout
-- Reusable React components
-- Client-side routing using React Router
+| Team Member | Role | Main Responsibilities |
+|---|---|---|
+| **A.R Kapuru Bandara (Aniketh)** | Project Setup, Authentication & Final Integration | React/Vite project setup, project coordination, authentication API, login/register frontend integration and final integration. |
+| **D.I. Liyanage (Dinindu)** | Projects Management | Projects REST API and Projects frontend integration, including project retrieval and CRUD operations. |
+| **P.B.C. Dewnitha (Chanithu)** | Task Management & Kanban Board | Tasks REST API, task CRUD operations and Kanban/task-board frontend integration. |
+| **G.K.C. Dulara (Chamidu)** | Team, Profile & Settings | Members API, Profiles API, Settings API and corresponding Members, Profile and Settings frontend integration. |
+| **D.P. Fonseka (Dewmina)** | Testing & API Documentation | Postman API testing, API test-result documentation, OpenAPI specification and README/API documentation support. |
 
----
-
-## 🛠️ Technologies Used
+## Technologies
 
 ### Frontend
-
 - React
 - Vite
 - JavaScript
-- HTML5
-- CSS3
-- React Router DOM
+- HTML/CSS
 
 ### Backend
-
 - Node.js
 - Express.js
-- REST API
+- REST APIs
 - CORS
-- Mock/in-memory data
+- dotenv
+
+### Database
+- MongoDB Atlas Free Tier
+- Mongoose
+
+### Authentication
+- Database-backed user registration and login
+- bcryptjs password hashing
 
 ### API Documentation and Testing
-
 - Postman
-- OpenAPI 3.0
-- YAML
-- JSON
+- OpenAPI 3.0.3
 
-### Version Control
-
-- Git
-- GitHub
-- Feature branches
-- Pull Requests
-
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```text
-SyncBoard
-│
-├── client
-│   ├── src
-│   │   ├── components
-│   │   │   ├── Board.jsx
-│   │   │   ├── Column.jsx
-│   │   │   ├── Layout.jsx
-│   │   │   ├── Layout.css
-│   │   │   └── TaskCard.jsx
-│   │   │
-│   │   ├── pages
-│   │   │   ├── Login.jsx
-│   │   │   ├── Login.css
-│   │   │   ├── Register.jsx
-│   │   │   ├── Register.css
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Dashboard.css
-│   │   │   ├── Projects.jsx
-│   │   │   ├── Projects.css
-│   │   │   ├── Tasks.jsx
-│   │   │   ├── Tasks.css
-│   │   │   ├── TaskDetails.jsx
-│   │   │   ├── TaskDetails.css
-│   │   │   ├── Members.jsx
-│   │   │   ├── Profile.jsx
-│   │   │   └── Settings.jsx
-│   │   │
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
+SyncBoard/
+├── client/
+│   ├── src/
 │   ├── package.json
 │   └── vite.config.js
 │
-├── server
-│   ├── controllers
-│   ├── data
-│   ├── routes
-│   └── server.js
+├── server/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── projectController.js
+│   │   ├── taskController.js
+│   │   ├── memberController.js
+│   │   ├── profileController.js
+│   │   └── settingsController.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Project.js
+│   │   ├── Task.js
+│   │   ├── Member.js
+│   │   ├── Profile.js
+│   │   └── Settings.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── projectRoutes.js
+│   │   ├── taskRoutes.js
+│   │   ├── memberRoutes.js
+│   │   ├── profileRoutes.js
+│   │   └── settingsRoutes.js
+│   ├── data/
+│   ├── seedUsers.js
+│   ├── seedProjects.js
+│   ├── seedTasks.js
+│   ├── seedMembers.js
+│   ├── seedProfiles.js
+│   ├── seedSettings.js
+│   ├── server.js
+│   ├── .env
+│   └── .gitignore
 │
-├── docs
-│   ├── SyncBoard-API-Assignment-02.openapi.yaml
-│   ├── SyncBoard-API-Assignment-02.postman_collection.json
-│   └── API-TEST-RESULTS.md
+├── docs/
+│   ├── API-TEST-RESULTS-ASSIGNMENT-03.md
+│   └── SyncBoard-API-Assignment-03.openapi.yaml
 │
 └── README.md
 ```
 
----
+## Application Architecture
 
-# 👥 Team Members and Contributions
+```text
+React / Vite Frontend
+        |
+        | HTTP REST API
+        v
+Node.js / Express Backend
+        |
+        | Mongoose
+        v
+MongoDB Atlas
+```
 
-The team member order below follows the team order used in the Assignment 01 project document.
-
-## 1. Aniketh
-
-**Role: Project Setup, Authentication and Final Integration**
-
-Responsibilities:
-
-- Initial React and Vite project setup
-- GitHub repository setup
-- Application routing structure
-- Shared application layout
-- Authentication REST API
-- Login and registration frontend integration
-- Project coordination
-- Final dashboard implementation
-- Final application integration and polishing
-
----
-
-## 2. Dinindu
-
-**Role: Projects Management**
-
-Responsibilities:
-
-- Projects REST API
-- Project mock data
-- Project controllers
-- Project API routes
-- Projects frontend integration
-- Project creation
-- Project updating
-- Project deletion
-- Project information display
-
----
-
-## 3. Dewmina
-
-**Role: Testing and API Documentation**
-
-Responsibilities:
-
-- REST API testing using Postman
-- Postman API collection
-- OpenAPI 3.0 specification
-- API test result documentation
-- README documentation
-- API endpoint documentation
-- Assignment 02 documentation support
-
----
-
-## 4. Chanithu
-
-**Role: Task Management and Kanban Board**
-
-Responsibilities:
-
-- Tasks REST API
-- Task mock data
-- Task controllers
-- Task API routes
-- Tasks frontend integration
-- Kanban task board
-- To Do, Doing and Done columns
-- Task creation and updating
-- Task deletion
-- Task Details page
-- Reusable task components
-
----
-
-## 5. Chamidu
-
-**Role: Team Members, Profile and Settings**
-
-Responsibilities:
-
-- Members REST API
-- Profile REST API
-- Settings REST API
-- Members mock data
-- Profile mock data
-- Settings mock data
-- Team Members frontend integration
-- Profile frontend integration
-- Settings frontend integration
-- Settings update functionality
-
----
-
-# ▶️ How to Run the Project
+The frontend communicates with the Express backend through REST endpoints. The backend uses Mongoose models and controllers to read and write data in MongoDB Atlas.
 
 ## Prerequisites
 
-Make sure the following software is installed:
+Install the following before running the project:
 
 - Node.js
 - npm
 - Git
-- Visual Studio Code or another suitable code editor
-- A modern web browser
+- A MongoDB Atlas account
 
----
-
-## 1. Clone the Repository
-
-The SyncBoard GitHub repository is:
-
-https://github.com/AnikethRansalu/SyncBoard
-
-Clone the repository:
+## Clone the Repository
 
 ```bash
 git clone https://github.com/AnikethRansalu/SyncBoard.git
-```
-
-Navigate into the project:
-
-```bash
 cd SyncBoard
 ```
 
----
+## Backend Setup
 
-## 2. Run the Backend
-
-Open a terminal and navigate to the server directory:
+Open a terminal in the `server` directory:
 
 ```bash
 cd server
-```
-
-Install the backend dependencies:
-
-```bash
 npm install
 ```
 
-Start the backend server:
+Create a `.env` file inside `server/`:
+
+```env
+PORT=5000
+MONGO_URI=YOUR_MONGODB_ATLAS_CONNECTION_STRING
+```
+
+Do not commit `.env` or expose the MongoDB connection string.
+
+The backend uses:
+
+```text
+server/.gitignore
+```
+
+to exclude `.env` and `node_modules`.
+
+## MongoDB Atlas Setup
+
+1. Create a MongoDB Atlas account.
+2. Create a Free Tier cluster.
+3. Configure a database user.
+4. Configure the network access/IP address required for local development.
+5. Copy the MongoDB connection string.
+6. Place it in `server/.env` as `MONGO_URI`.
+7. Start the backend and confirm the MongoDB connection message.
+
+Example:
+
+```text
+MongoDB Atlas connected successfully
+```
+
+## Seed the Database
+
+The project includes seed scripts for the database-backed resources.
+
+From the `server` directory:
+
+```bash
+node seedUsers.js
+node seedProjects.js
+node seedTasks.js
+node seedMembers.js
+node seedProfiles.js
+node seedSettings.js
+```
+
+The seed scripts populate the corresponding collections with development/test data.
+
+## Start the Backend
+
+From `server/`:
 
 ```bash
 node server.js
 ```
 
-The backend API runs on:
+The backend runs on:
 
 ```text
 http://localhost:5000
 ```
 
-Health check:
+### Health Check
+
+Open:
 
 ```text
 http://localhost:5000/api/health
 ```
 
-The API should return a successful health response when the backend is running.
+Expected response:
 
----
+```json
+{
+  "status": "OK",
+  "message": "SyncBoard backend is healthy"
+}
+```
 
-## 3. Run the Frontend
+## Frontend Setup
 
-Open another terminal.
-
-From the SyncBoard project directory, navigate to the client directory:
+Open another terminal:
 
 ```bash
 cd client
+npm install
+npm run dev
 ```
 
-Install the frontend dependencies:
+The frontend is configured for local development on:
+
+```text
+http://localhost:3000
+```
+
+## Application Pages
+
+The application includes the following routes:
+
+- `/login`
+- `/register`
+- `/dashboard`
+- `/projects`
+- `/tasks`
+- `/task/:id`
+- `/members`
+- `/profile`
+- `/settings`
+
+## Authentication API
+
+### Register
+
+```http
+POST /api/auth/register
+```
+
+### Login
+
+```http
+POST /api/auth/login
+```
+
+Passwords are hashed with bcryptjs before database storage.
+
+The current implementation provides database-backed authentication. JWT/token-based authentication is not claimed as part of this Assignment 03 implementation.
+
+## REST API Endpoints
+
+### Projects
+
+```http
+GET    /api/projects
+GET    /api/projects/:id
+POST   /api/projects
+PUT    /api/projects/:id
+DELETE /api/projects/:id
+```
+
+### Tasks
+
+```http
+GET    /api/tasks
+GET    /api/tasks/:id
+POST   /api/tasks
+PUT    /api/tasks/:id
+DELETE /api/tasks/:id
+```
+
+### Members
+
+```http
+GET /api/members
+GET /api/members/:id
+```
+
+### Profiles
+
+```http
+GET /api/profiles
+GET /api/profiles/:id
+```
+
+### Settings
+
+```http
+GET /api/settings
+GET /api/settings/:userId
+PUT /api/settings/:userId
+```
+
+## Database Collections
+
+The application uses Mongoose models for the following resources:
+
+- `User`
+- `Project`
+- `Task`
+- `Member`
+- `Profile`
+- `Settings`
+
+These models provide the database persistence layer for the application.
+
+## Persistence
+
+Assignment 03 replaces the earlier in-memory API persistence with MongoDB Atlas persistence for the implemented resources.
+
+Data created or modified through the database-backed APIs remains available after restarting the backend, provided the same MongoDB Atlas database is used.
+
+## API Documentation
+
+Assignment 03 API testing and documentation are available in the `docs/` directory:
+
+```text
+docs/API-TEST-RESULTS-ASSIGNMENT-03.md
+docs/SyncBoard-API-Assignment-03.openapi.yaml
+```
+
+The OpenAPI document currently focuses on the Projects API.
+
+## API Testing
+
+The implemented database-backed APIs were tested using Postman.
+
+Testing included:
+
+- GET operations
+- POST operations
+- PUT operations
+- DELETE operations
+- Retrieval by ID where implemented
+- MongoDB Atlas persistence
+- Persistence after backend restart
+
+The detailed Assignment 03 API testing results are documented in:
+
+```text
+docs/API-TEST-RESULTS-ASSIGNMENT-03.md
+```
+
+## GitHub Repository
+
+Repository:
+
+https://github.com/AnikethRansalu/SyncBoard
+
+### Assignment Tags
+
+```text
+assignment-01-static-frontend
+assignment-02-working-rest-apis
+assignment-03-working-full-stack-application
+```
+
+The Assignment 03 tag represents the completed database-backed full-stack checkpoint.
+
+## Team Contributions
+
+### 1. Aniketh – Project Setup, Authentication & Final Integration
+- React/Vite project setup and coordination
+- MongoDB Atlas connection integration
+- User database model
+- Database-backed registration/login
+- Password hashing with bcryptjs
+- Final full-stack integration and coordination
+
+### 2. Dinindu – Projects Management
+- Project Mongoose model
+- Database-backed Projects CRUD API
+- Project seed data
+- Projects API persistence testing
+
+### 3. Chanithu – Task Management & Kanban Board
+- Task REST API work
+- Task database persistence
+- Task CRUD testing
+- Kanban/task-board integration work
+
+### 4. Chamidu – Team, Profile & Settings
+- Members database model/API
+- Profiles database model/API
+- Settings database model/API
+- Corresponding persistence testing
+
+### 5. Dewmina – Testing & API Documentation
+- Postman API testing
+- Assignment 03 API test-result documentation
+- OpenAPI specification
+- README/API documentation support
+
+## Complete Run Procedure
+
+### Terminal 1 – Backend
+
+```bash
+cd SyncBoard/server
+npm install
+node server.js
+```
+
+If the database needs seed data:
+
+```bash
+node seedUsers.js
+node seedProjects.js
+node seedTasks.js
+node seedMembers.js
+node seedProfiles.js
+node seedSettings.js
+```
+
+### Terminal 2 – Frontend
+
+```bash
+cd SyncBoard/client
+npm install
+npm run dev
+```
+
+Then open the frontend at:
+
+```text
+http://localhost:3000
+```
+
+## Troubleshooting
+
+### MongoDB connection fails
+
+Check:
+
+- `MONGO_URI` is present in `server/.env`.
+- The MongoDB Atlas cluster is running.
+- The database user credentials are correct.
+- Your current IP/network is allowed in MongoDB Atlas.
+- The connection string has been copied correctly.
+
+### Backend does not start
+
+Check that:
 
 ```bash
 npm install
 ```
 
-Start the Vite development server:
+has been completed inside `server/`.
+
+Then run:
+
+```bash
+node server.js
+```
+
+### Frontend does not start
+
+Check that:
+
+```bash
+npm install
+```
+
+has been completed inside `client/`.
+
+Then run:
 
 ```bash
 npm run dev
 ```
 
-Vite normally provides a local address similar to:
+### API requests fail
+
+Confirm that the backend is running on:
 
 ```text
-http://localhost:5173
+http://localhost:5000
 ```
 
-Open the URL displayed by Vite in a web browser.
-
-### Windows PowerShell Alternative
-
-If PowerShell blocks the npm PowerShell script, use:
-
-```bash
-npm.cmd install
-npm.cmd run dev
-```
-
----
-
-# 🧭 Application Pages
-
-| Page | Route |
-|------|-------|
-| Login | `/login` |
-| Registration | `/register` |
-| Dashboard | `/dashboard` |
-| Projects | `/projects` |
-| Tasks | `/tasks` |
-| Task Details | `/task/:id` |
-| Team Members | `/members` |
-| Profile | `/profile` |
-| Settings | `/settings` |
-
----
-
-# 🔌 REST API Documentation
-
-The backend provides REST API endpoints for the main SyncBoard modules.
-
-## Authentication
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register a user |
-| POST | `/api/auth/login` | Login a user |
-
-## Projects
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/projects` | Get all projects |
-| GET | `/api/projects/:id` | Get project by ID |
-| POST | `/api/projects` | Create a project |
-| PUT | `/api/projects/:id` | Update a project |
-| DELETE | `/api/projects/:id` | Delete a project |
-
-## Tasks
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/tasks` | Get all tasks |
-| GET | `/api/tasks/:id` | Get task by ID |
-| POST | `/api/tasks` | Create a task |
-| PUT | `/api/tasks/:id` | Update a task |
-| DELETE | `/api/tasks/:id` | Delete a task |
-
-## Members
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/members` | Get all members |
-| GET | `/api/members/:id` | Get member by ID |
-
-## Profiles
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/profiles` | Get all profiles |
-| GET | `/api/profiles/:id` | Get profile by ID |
-
-## Settings
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/settings` | Get all settings |
-| GET | `/api/settings/:userId` | Get settings for a user |
-| PUT | `/api/settings/:userId` | Update user settings |
-
----
-
-# 🧪 API Testing
-
-The SyncBoard REST APIs were tested using Postman.
-
-The Postman collection contains **19 API requests** covering:
-
-- Authentication
-- Projects
-- Tasks
-- Members
-- Profiles
-- Settings
-
-The test results are documented in:
+and that the frontend is running on:
 
 ```text
-docs/API-TEST-RESULTS.md
+http://localhost:3000
 ```
 
----
+Also check the browser console and backend terminal for errors.
 
-# 📑 API Documentation Files
+## Current Scope and Limitations
 
-The project includes the following API documentation files.
+This README describes the features actually implemented and tested for the Assignment 03 database-backed checkpoint.
 
-### Postman Collection
+The following items are **not claimed as completed here unless implemented separately**:
+
+- JWT/token-based authentication
+- Automated Jest/React Testing Library/Supertest test suites
+- CI pipeline
+- WebSocket/Socket.io realtime synchronization
+- Docker/docker-compose deployment
+- Public production deployment
+- Full offline/local-storage synchronization
+- Advanced concurrent-edit conflict resolution
+
+These can be addressed in later project milestones if required by the overall project brief.
+
+## Summary
+
+SyncBoard Assignment 03 provides a working full-stack foundation consisting of:
+
+- React/Vite frontend
+- Node.js/Express REST backend
+- MongoDB Atlas database
+- Mongoose models
+- Database-backed authentication
+- Database-backed Projects, Tasks, Members, Profiles and Settings persistence
+- Postman API testing
+- OpenAPI documentation
+- Team-based GitHub contributions
+
+**Assignment 03 Tag:**
 
 ```text
-docs/SyncBoard-API-Assignment-02.postman_collection.json
+assignment-03-working-full-stack-application
 ```
-
-This collection contains the 19 REST API requests used for testing.
-
-### OpenAPI Specification
-
-```text
-docs/SyncBoard-API-Assignment-02.openapi.yaml
-```
-
-This contains the OpenAPI 3.0 specification generated for the SyncBoard REST API.
-
-### API Test Results
-
-```text
-docs/API-TEST-RESULTS.md
-```
-
-This documents the API testing results for the 19 documented REST API requests.
-
----
-
-# 💾 Mock Data
-
-Assignment 02 uses **mock/in-memory data** instead of a database.
-
-The backend stores sample data in JavaScript files inside:
-
-```text
-server/data/
-```
-
-Examples include:
-
-```text
-server/data/projects.js
-server/data/tasks.js
-server/data/members.js
-server/data/profiles.js
-server/data/settings.js
-```
-
-Because the current version uses in-memory mock data, changes made through the APIs may reset when the backend server is restarted.
-
-Database persistence is not part of the current Assignment 02 mock-data implementation and can be added in a later development stage.
-
----
-
-# 🌿 GitHub Workflow
-
-The project was developed using Git and GitHub with feature branches for different areas of the application.
-
-Feature branches include:
-
-```text
-feature/project-setup
-feature/login-registration
-feature/project-workspace
-feature/kanban-task-board
-feature/team-profile-settings-ui-ux-integration
-feature/testing-api-documentation
-```
-
-Each team member worked on an assigned feature area and committed their changes using Git.
-
-Pull Requests were used to integrate completed features into the `main` branch.
-
-The repository history contains the individual team contributions and merged Pull Requests.
-
----
-
-# 📌 Assignment 02
-
-Assignment 02 focuses on:
-
-**Working REST APIs with Mock Data Integrated with Frontend**
-
-The project demonstrates the integration between the React frontend and the Node.js/Express REST API.
-
-The API documentation and testing materials are available in the `docs` directory.
-
----
-
-# 📄 Conclusion
-
-SyncBoard has progressed from the static frontend skeleton developed in Assignment 01 to a frontend-integrated REST API application for Assignment 02.
-
-The current implementation provides working REST APIs with mock data for authentication, projects, tasks, members, profiles and settings, together with frontend integration.
-
-Future development stages can extend the system with database persistence, advanced authentication, offline support, automated testing, real-time collaboration and deployment.
